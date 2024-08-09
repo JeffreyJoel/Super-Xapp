@@ -1,9 +1,9 @@
 'use client';
-// import { ConnectButton } from '@rainbow-me/rainbowkit';
+import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useNavigate } from "@/hooks/useNavigate";
 import { useNavIcon } from "@/hooks/context";
-import Image from "next/image";
-import { usePathname } from "next/navigation";
+// import Image from "next/image";
+// import { usePathname } from "next/navigation";
 import {BadgeNew} from "../components/banner/new-badge";
 import { IconSuperFastSimple } from "../components/transaction-modals/icons";
 import { useConfigState } from "../state/config";
@@ -15,7 +15,7 @@ export default function Header() {
     const displayTransactions = useConfigState.useDisplayTransactions();
     const fast = useConfigState.useFast();
     // const superbridgeTestnetsEnabled = useInjectedStore((s) => s.testnets);
-    const pathname = usePathname();
+    // const pathname = usePathname();
 
     const navIcon = useNavIcon();
 
@@ -53,11 +53,11 @@ export default function Header() {
                   xmlns="http://www.w3.org/2000/svg"
                   width="27"
                   height="16"
-                  className={
-                    pathname === "/" && !fast && !displayTransactions
-                      ? "fill-foreground transition-all"
-                      : "fill-muted-foreground transition-all"
-                  }
+                  // className={
+                  //   pathname === "/" && !fast && !displayTransactions
+                  //     ? "fill-foreground transition-all"
+                  //     : "fill-muted-foreground transition-all"
+                  // }
                   viewBox="0 0 27 16"
                 >
                   <g clipPath="url(#clip0_364_6103)">
@@ -88,7 +88,7 @@ export default function Header() {
               {/* )} */}
             </div>
 
-    {/* <ConnectButton
+    <ConnectButton
     chainStatus="icon"
     label="Connect"
     showBalance={{ smallScreen: false, largeScreen: false }}
@@ -96,7 +96,7 @@ export default function Header() {
       smallScreen: "avatar",
       largeScreen: "avatar",
     }}
-  /> */}
+  />
 </div>
 
           
