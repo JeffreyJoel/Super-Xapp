@@ -1,27 +1,31 @@
 'use client';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
+// import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useNavigate } from "@/hooks/useNavigate";
 import { useNavIcon } from "@/hooks/context";
-// import Image from "next/image";
-// import { usePathname } from "next/navigation";
 import {BadgeNew} from "../components/banner/new-badge";
 import { IconSuperFastSimple } from "../components/transaction-modals/icons";
 import { useConfigState } from "../state/config";
+import { useAccount } from 'wagmi';
+import { Account } from './transaction-modals/account';
+import { WalletOptions } from './transaction-modals/wallet-option';
 
 
-export default function Header() {
+
+export function  Header() {
     const deployments: any[] = [];
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     const displayTransactions = useConfigState.useDisplayTransactions();
     const fast = useConfigState.useFast();
     // const superbridgeTestnetsEnabled = useInjectedStore((s) => s.testnets);
     // const pathname = usePathname();
 
     const navIcon = useNavIcon();
+    const { address } = useAccount();
+
 
     return (
         <nav className="flex flex-row justify-between items-center p-3 md:p-6 fixed top-0 left-0 w-screen z-10">
-            <div onClick={() => navigate("/")} className="cursor-pointer">
+            <div  className="cursor-pointer">
                 {deployments.length === 1 ? (
                     <img
                         src={navIcon!}
@@ -46,7 +50,7 @@ export default function Header() {
           {/* {isSuperbridge && ( */}
             <div className="flex gap-1">
               <button
-                onClick={() => navigate("/")}
+                // onClick={() => navigate("/")}
                 className={`flex items-center justify-center h-10 w-14 bg-card rounded-full shadow-sm transition-all hover:scale-105`}
               >
                 <svg
@@ -73,7 +77,7 @@ export default function Header() {
 
               {/* {!superbridgeTestnetsEnabled && ( */}
                 <button
-                  onClick={() => navigate("fast")}
+                  // onClick={() => navigate("fast")}
                   className={`relative flex items-center justify-center h-10 w-14 bg-card rounded-full shadow-sm transition-all hover:scale-105`}
                 >
                   <IconSuperFastSimple
@@ -88,15 +92,11 @@ export default function Header() {
               {/* )} */}
             </div>
 
-    <ConnectButton
-    chainStatus="icon"
-    label="Connect"
-    showBalance={{ smallScreen: false, largeScreen: false }}
-    accountStatus={{
-      smallScreen: "avatar",
-      largeScreen: "avatar",
-    }}
-  />
+            {address ? (
+                    <Account />
+                ) : (
+                    <WalletOptions />
+                )}
 </div>
 
           
